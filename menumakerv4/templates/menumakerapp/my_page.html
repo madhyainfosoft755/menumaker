@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+{% load menumaker_tags %}
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Your Cuisine</title>
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <style type="text/css">
+      
+    @page {
+        size: a4 portrait;
+        @frame header_frame {
+            -pdf-frame-content: header_content;
+            left: 50pt; width: 512pt; top: 30pt; height: 50pt;
+        }
+        @frame content_frame {
+            left: 50pt; width: 512pt; top: 90pt; height: 632pt;
+        }
+        @frame footer_frame {
+
+            -pdf-frame-content: footer_content1;
+            left: 50pt; width: 512pt; top: 772pt; height: 20pt;
+        }
+        @frame footer_frame {
+
+            -pdf-frame-content: footer_content;
+            left: 50pt; width: 512pt; top: 772pt; height: 20pt;
+        }
+    }
+    @media screen{
+      body{
+        /*background-image: url({% static 'images/myp.jpg' %});
+        background-size: 100% 250%;*/
+        
+      }
+
+      *{
+        margin: 0px;
+        padding: 0px;
+        user-select: none;
+        font-family: arial;
+      }#user-profile{
+        height: 40px;
+        width: 40px;
+        text-align: center;
+        color: black;
+        font-size: 14px;
+        line-height: 40px;
+        border-radius: 50%;
+        background:gray;
+        background-size: cover;
+      }
+      #profile-text:hover{
+        text-decoration: none;
+      }
+      #profile-text-div , #footer_content , #footer_content1,#header_content{
+        display: none;
+      }
+      @media only screen and (max-width: 600px) {
+        #profile-text{
+          display: none;
+        }
+        #profile-text-div{
+          display: block;
+        }
+      }
+      
+
+      /*************for button ************/
+      .c-btn{
+
+  box-sizing: border-box;
+  /* appearance: none; */
+  background-color: transparent;
+  border: 2px solid #007ee3;
+  border-radius: 0.6em;
+  color: #007ee3;
+  cursor: pointer;
+  display: inline-flex;
+  align-self: center;
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 0.5;
+  margin: 10px;
+  padding: 1.2em 1.8em;
+  text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+}
+
+.c-btn:hover , .c-btn:focus{
+  color: #fff;
+    outline: 0;
+}
+.c-first {
+  transition: box-shadow 200ms ease-in-out, color 300ms ease-in-out;
+
+}
+.c-first:hover{
+box-shadow: 0 0 40px 40px #007ee3 inset;
+
+}
+
+
+      /*************end button ***********/
+
+      /************* for form */
+
+    .ad-box .back #cross{
+      height: 30px;
+      width: 30px;
+      background-color: white;
+      box-shadow: 2px 2px 2px black;
+      position: fixed;
+      top: -15px;
+      right: -15px;
+      font-size: 30px;
+      line-height: 30px;
+    }
+    #form-container .back button:hover{
+      background-color: black;
+      color: white;
+    }
+      #form-container{
+
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+			margin: 0;
+			padding: 0;
+			font-family: sans-serif;
+			background-color: rgba(20,29,37,0.6);
+      z-index: 9999;
+      visibility: hidden;
+		}
+		.ad-box{
+
+			width: 300px;
+			padding: 40px;
+			position: fixed;
+      width:400px;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50% , -50%);
+			background: #ffffff;
+			text-align: center;
+    }
+		.ad-box h1{
+			color: black;
+			text-transform: uppercase;
+			font-weight: 500;
+
+		}
+		.ad-box input[class = "ad-txt"] , .ad-pass{
+			border: 0;
+			background: none;
+			display: block;
+			margin: 20px auto;
+			text-align: center;
+			border: 2px solid #3498db;
+			padding: 14px 10px;
+			width: 200px;
+			outline: none;
+			color: black;
+			border-radius: 24px;
+			transition: 0.25s;
+			resize: none;
+		}
+		.ad-box input[class = "ad-txt"]:focus , .ad-box .ad-pass:focus{
+			width: 280px;
+			border-color: #2ecc71;
+		}
+		.ad-box input[type = "submit"]{
+			border: 0;
+			background: none;
+			display: block;
+			margin: 20px auto;
+			text-align: center;
+			border: 2px solid #2ecc71;
+			padding: 14px 40px;
+			outline: none;
+			color: black;
+			border-radius: 24px;
+			transition: 0.25s;
+			cursor: pointer;
+		}
+		.ad-box input[type = "submit"]:hover{
+			background: #2ecc71;
+		}
+    /* ************* end form */
+    /*#body-container{
+      position: relative;
+      margin: 0px;
+      padding: 0px;
+      overflow-y: hidden;
+    }*/
+      span{
+        display: none;
+      }
+      h1{
+        color: #0035b0;
+        margin-left: 150px;
+      }
+      table{
+        background: #ffffff;
+        margin-left: 50px;
+        border: 2px solid black;
+        border-collapse: collapse;
+        border-spacing:10px;box-shadow: 2px 2px 10px 2px rgba(0,0,0,0.5);
+        /*width: 40%;*/
+        margin: 20px auto;
+      }
+      table caption{
+        /*border: 2px solid red;
+*/        text-align: left;
+        padding: 13px 13px 13px 0px;
+        font-size: 25px;
+        color: blue;
+        font-weight: bold;
+      }
+      table tr .c-header {
+        color : #004dfd;
+        text-align: left;
+        font-size: 20px;
+        /* padding: 8px 15px;*/
+        line-height: 40px;
+        padding: 0px 10px;
+      }
+      table tr .c-header img{
+        float: left;
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        margin-right: 7px;
+      }
+      table tr .c-header b{
+        display :none;
+      }
+      table tr th{
+        text-align: left;
+        padding: 7px 15px;
+      }
+      table tr td{
+        padding: 5px 15px;
+      }
+      table tr .last-td{
+        min-width: 300px;
+      }
+
+      table .c-head{
+        background-color: rgba(2, 117, 216 ,0.8);
+        color:white;
+      }
+
+      .list-nav{
+        height: 80px;
+        width: 435px;
+        margin: auto;
+        /* border: 2px solid red; */
+              }
+      /* .list-nav ul{
+        margin: auto ;
+      }*/
+      .list-nav ul li {
+        list-style: none;
+        display: inline;
+        line-height: 70px;
+      }
+      /* .list-nav ul li a  {
+        text-decoration: none;
+        color: black;
+        font-weight: bolder;
+        font-size: 22px;
+        padding: 8px 15px;
+        background-color: rgba(0, 0, 255, 0.5);
+        border-radius: 7px;
+        margin-right: 35px;
+        text-shadow: 2px 1px 5px rgba(255,255,255,0.9);
+        box-shadow: 3px 2px 7px 2px rgba(0, 0, 0, 0.5);
+      } */
+
+      /* .list-nav ul li button  {
+        color: black;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 20px;
+        padding: 8px 15px;
+        background-color: rgba(0, 0, 255, 0.5);
+        border-radius: 7px;
+        margin-right: 35px;
+        text-shadow: 2px 1px 5px rgba(255,255,255,0.9);
+        box-shadow: 3px 2px 7px 2px rgba(0, 0, 0, 0.5);
+      } */
+
+      /* .list-nav ul li a:hover,.list-nav ul li button:hover  {
+        background-color: rgba(0, 0, 255, 0.8);
+      } */
+      .bg{
+        background-color:  #3aafb9;
+      }
+      .textC{
+        color: #feffff;
+      }
+      .bi{
+        background-image: url({% static 'images/lunch.jpg'%});
+        background-repeat: no-repeat;
+      }
+    }
+/* PDF*/
+    @media print{
+      h1{
+        color: #007ee3;
+        font-size: 25px;
+        line-height: 10px;
+      }
+      #header_content{
+        font-weight: 400;
+        color: #0035b0;
+      }
+      #footer_content1{
+        font-weight: 400;
+        color: #0035b0;
+      }
+      body {
+      -webkit-print-color-adjust: exact;
+      }
+      table{
+        margin: 0px auto 0px auto;
+        position: ;
+      }
+      table caption , .t{
+        display: none;
+      }
+      .c-h1{
+       font-size: 20px;
+       color: blue;
+       font-weight: bold;
+       line-height: 18px;
+       text-align: center;
+      }
+      /* table tr th {
+        height: 35px;
+        color : red;
+        font-size: 18px;
+      } */
+      table tr .table-head{
+        height: 38px;
+        text-align: left;
+        margin-left: 5px;
+        background-color:#0283f1;
+        color: white;
+        font-size: 18px;
+
+        padding-top: 6px;
+        /* padding: 9px 5px 5px 5px  ; */
+      }
+      table tbody tr .s-last-td ,table tbody tr .last-td {
+          margin-left: 10px;
+          padding-top: 6px;
+      }
+      table tr td{
+        height: 30px;
+        font-size: 14px;
+        color : black;
+      }
+      table tr .c-header{
+        color: #004dfd;
+        text-align: left;
+        font-size: 20px;
+        margin-left: 20px;
+        margin-top: 6px;
+        padding-top: 40%;
+      }
+      /* #l-image{
+        height: 400px;
+        width: 400px;
+        border-radius: 50%;
+        margin-right: 7px;
+      }*/
+
+      /* table tbody tr th img{
+        background-color: red;
+        float: left;
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        margin-right: 7px;
+        background-image:url('{{ STATIC_URL }}images/b.jpg');
+        background-repeat:no-repeat;
+        background-size:100%;
+      }*/
+      table tr .c-header img{
+        float: left;
+        height: 40px;
+        width: 40px;
+        margin-right: 7px;
+        border-radius:50%;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+      }
+
+      /* table tr td{
+        height: 30px;
+
+        padding: 4px 0px 4px 0px;
+        font-size: 13px;
+      } */
+      table tr .table-sn{
+        padding-top: 4px;
+        width: 40px;
+        text-align: center;
+      }
+      table tr .table-cuisine{
+        margin-left: 10px;
+        padding-top: 4px;
+        width: 150px;
+      }
+      table tr .table-item{
+        margin-left: 10px;
+        padding-top: 4px;
+        width: 250px;
+      }
+      nav , form , a , button{
+        display: none;
+      }
+    }
+    </style>
+  </head>
+  <body>
+
+
+
+
+
+    <div id="header_content">
+      <img src="{% static 'images/logo_menu.jpg'%}" height="80px" width="100px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <span style="font-size:20px;top:50%;">Generated by Menumaker.</span>
+    </div>
+
+
+<div  id="body-container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+      <div class="container">
+        <img src="{% static 'images/logo_menu.jpg'%}" style="height:70px; width:80px; "> &nbsp &nbsp
+        <!-- {% if request.user.is_authenticated %}
+            <a class="navbar-brand" href="/profile/">Welcome {{request.user|upper}}</a>
+        {% endif %} -->
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link text-dark" href="/">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <!-- <li class="nav-item">
+              <a class="nav-link text-dark" href="#">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="#">Services</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="#">Contact</a>
+            </li> -->
+            <li class="nav-item active">
+              {% if not request.user.is_authenticated %}
+              <a class="nav-link text-dark" href="/signup/">SignUp</a>
+  						{% endif %}
+            </li>
+            <li class="nav-item active">
+
+              {% if request.user.is_authenticated %}
+                  <a class="nav-link text-dark" href="/logout/">Logout</a>
+              {% else %}
+                  <a class="nav-link text-dark" href="/login/">Login</a>
+              {% endif %}
+
+            </li>
+            <!-- <li class="nav-item active">
+              <a class="nav-link" href="/cadmin/">Admin
+              </a>
+            </li> -->
+
+            <li class="nav-item active text-light">
+              {% if request.user.is_authenticated %}
+                <a href="/profile/" id="profile-text">
+                  <div class="bg-info text-light" id="user-profile">{{first|title}}.{{last|title}}</div>
+                </a>
+
+                <a href="/profile/" class="nav-link" id="profile-text-div">
+                  Profile
+                </a>
+              {% else %}
+                <div class="bg-light" id="user-profile-image"></div>
+              {% endif %}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+
+    
+    
+    
+    <div class="container" style="margin-top:96px;">
+    <div class="row justify-content-end bg">
+      <div class="col-4 p-3 text-light align-self-center">
+        <!-- <a href="/" class="btn btn-outline-light fw-bold">Home</a><br><br> -->
+        <h5 class="t">You are registerd user <a href="#" class="text-danger fw-bold">subscribe now</a></h5>
+      </div>
+      <div class="col-8 p-3 textC text-right">
+        <h3 class="t" class="textC">Welcome {{request.user|upper}}</h3>
+        <!-- <h4>{{request.user.email}}</h4> -->
+      </div>
+    </div>
+
+  </div>
+
+ {% if  count_obj %}
+
+  <!-- <div id="body-container "> -->
+<div class="container">
+    <div class="row">
+
+      {% if run_forloop == False %}
+        <div class="col-3  pl-3 pt-2">
+          <a href="/my_page" class="btn btn-outline-info fw-bold">Back</a>
+        </div>
+      {% else %}
+      <div class="col-3  pl-3 pt-2"></div>
+      {% endif %}
+
+      <div class="col-6"></div>
+
+      <div class="col-3 pr-3 pt-2 text-right">
+        {% if count_obj != 'f' %}
+          {% if remain_item %}
+            <a href="/my_page?last_cui=99" class="btn btn-outline-info fw-bold">New created</a>
+          {% else %}
+            <a href="/" class="btn btn-outline-info fw-bold">New</a><br><br>
+          {% endif %}
+        {% endif %}
+      </div>
+
+      {% for message in messages %}
+        {% if 'notpaid' in message.tags %}
+          <div class="col-12 p-2 text-center">
+            <section class="text-danger">{{message}}</section>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    {% if count_obj != 'f' %}
+      {% if run_forloop == True %}
+        <ul class="list-group">
+            <div class="container">
+              <div class="row justify-content-center">
+                <div class="col-6">
+                  <ul class="list-group">
+                    <!-- {% for c in count_obj %}
+                      <li class="list-group-item list-group-item-light">{{forloop.counter}}. Your Cuisine created on  <a href="/my_page?cui={{forloop.counter}}" >{{date}}</a> </li>
+                    {% endfor %} -->
+                    {% for c in creat_date %}
+                      <li class="list-group-item list-group-item-light">{{forloop.counter}}. Your Cuisine created on  <a href="/my_page?cui={{forloop.counter}}" >{{c}}  </a> </li>
+                    {% endfor %}
+                    <!-- {{creat_date}} -->
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </ul>
+        {% endif %}
+      {% endif %}
+
+
+    <!-- <b>Total breakfast items is : {{b_count}}</b><br>
+    <b>Total lunch items is : {{l_count}}</b><br>
+    <b>Total dinner items is : {{d_count}}</b><br>
+    <b>Total hightea items is : {{h_count}}</b><br>
+    <b>Total brunch items is : {{br_count}}</b><br> -->
+    {% if data %}
+    <div class="table-responsive">
+
+    <table  class="w-50 mx-auto " id="myTable" border="1" align="center">
+
+      <caption>Your Cuisine created on {{date}}</caption>
+
+      {% if breakfast%}
+      <tbody>
+        <tr scope="row">
+
+          <th colspan="3" class="title-row c-header" ><img src="{% static 'images/Breakfast.jpg' %}" alt="" style="border-radius:20px!important;"><b>&nbsp;&nbsp;</b> Breakfast</th>
+            <!-- {% static 'images/b.jpg' %} -->
+
+        </tr>
+        <tr class="c-head">
+          <th scope="col" class="table-head">SN</th>
+          <th scope="col" class="s-last-td table-head">Cuisine</th>
+          <th scope="col" class="last-td table-head">Item</th>
+        </tr>
+        {%for i in breakfast %}
+
+          <tr>
+            <td class="table-sn">{{forloop.counter}}</td>
+            <td class="table-cuisine">{{i.items.cuisine | title}}</td>
+            <td  class="table-item">{{i.items.item}}</td>
+          </tr>
+
+        {% endfor %}
+      </tbody>
+      {% endif %}
+
+
+      {% if lunch %}
+      <tbody >
+        <tr>
+          <th colspan="3" class="title-row c-header"><img src="{% static 'images/lunch.jpg' %}" alt=""><b>&nbsp;&nbsp;</b> Lunch
+            </th>
+        </tr>
+        <tr class="c-head">
+          <th scope="col" class="table-head">SN</th>
+          <th scope="col" class="s-last-td table-head">Cuisine</th>
+          <th scope="col" class="last-td table-head">Item</th>
+        </tr>
+
+        {%for i in lunch %}
+
+        <tr>
+          <td class="table-sn">{{forloop.counter}}</td>
+          <td class="table-cuisine">{{i.items.cuisine | title}}</td>
+          <td  class="table-item">{{i.items.item}}</td>
+        </tr>
+
+        {% endfor %}
+      </tbody>
+      {% endif%}
+
+      {% if dinner %}
+      <tbody>
+        <tr>
+          <th colspan="3" class="title-row c-header"><img src="{% static 'images/dinner.jpg' %}" alt=""><b>&nbsp;&nbsp;</b>  Dinner
+           </th>
+        </tr>
+        <tr class="c-head">
+          <th scope="col" class="table-head">SN</th>
+          <th scope="col" class="s-last-td table-head">Cuisine</th>
+          <th scope="col" class="last-td table-head">Item</th>
+        </tr>
+        {%for i in dinner %}
+
+        <tr>
+          <td class="table-sn">{{forloop.counter}}</td>
+          <td class="table-cuisine">{{i.items.cuisine | title}}</td>
+          <td  class="table-item">{{i.items.item}}</td>
+        </tr>
+
+        {% endfor %}
+      </tbody>
+      {% endif %}
+
+
+
+      {% if hightea %}
+      <tbody>
+        <tr>
+          <th colspan="3" class="title-row c-header"><img src="{% static 'images/hightea.jpg' %}" alt=""><b>&nbsp;&nbsp;</b> HighTea
+            </th>
+        </tr>
+        <tr class="c-head">
+          <th scope="col" class="table-head">SN</th>
+          <th scope="col" class="s-last-td table-head">Cuisine</th>
+          <th scope="col" class="last-td table-head">Item</th>
+        </tr>
+
+
+            {%for i in hightea %}
+
+                <tr>
+                  <td class="table-sn">{{forloop.counter}}</td>
+                  <td class="table-cuisine">{{i.items.cuisine | title}}</td>
+                  <td  class="table-item">{{i.items.item}}</td>
+                </tr>
+
+            {% endfor %}
+      </tbody>
+      {% endif %}
+
+
+
+
+      {% if brunch %}
+      <tbody>
+        <tr>
+          <th colspan="3" class="title-row c-header"><img src="{% static 'images/brunch.jpg' %}" alt=""> <b>&nbsp;&nbsp;</b> Brunch
+          </th>
+        </tr>
+        <tr class="c-head">
+          <th scope="col" class="table-head">SN</th>
+          <th scope="col" class="s-last-td table-head">Cuisine</th>
+          <th scope="col" class="last-td table-head">Item</th>
+        </tr>
+        {%for i in brunch %}
+
+        <tr>
+          <td class="table-sn">{{forloop.counter}}</td>
+          <td class="table-cuisine">{{i.items.cuisine | title}}</td>
+          <td  class="table-item">{{i.items.item}}</td>
+        </tr>
+
+        {% endfor %}
+      </tbody>
+      {% endif %}
+    </table>
+    <h1 class="c-h1"><span>Your Cuisine created on {{date}}</span> </h1>
+
+    <nav class="list-nav">
+    <ul>
+      {% if save  %} 
+
+
+      <!-- DOWNLOAD PDF-->
+      
+      
+      <li>
+        <!-- <a href="/pdf/" class="download btn btn-primary" target="_blank">Send by mail</a> -->
+        <form method="post">{%csrf_token%}<button class="c-btn c-first" name="save-btn" value="save-btn"> Save</button></form>
+      </li>
+      {% else %}
+      <li>
+        <a href="/downloadpdf/?id={{id}}" class="c-btn c-first" target="_blank">Download</a>
+      </li>
+      <li>
+        <!-- <a href="/pdf/" class="download btn btn-primary" target="_blank">Send by mail</a> -->
+        <button class="c-btn c-first" id ="form-attach"> Share with mail</button>
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
+
+    <!-- <div class="container">
+      <div class="row mb-4">
+        <div class="col-4 text-center">
+          <a href="/pdf/" class="download btn btn-primary" target="_blank">View in pdf</a>
+        </div>
+        <div class="col-4 text-center">
+          <a href="/downloadpdf/" class="download btn btn-primary">Download</a>
+        </div>
+        <div class="col-4 text-center">
+          <button class="download btn btn-primary" id ="form-attach"> Share with mail</button>
+        </div>
+      </div>
+    </div> -->
+
+</div>
+  </div>
+</div>
+
+  {% endif %}
+    <div  id="form-container">
+      <!-- <div class="back">
+        <button type="submit" name="button" id="back"></button>
+      </div> -->
+
+
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-4">
+          <form class="ad-box" action="/email/" method="post" enctype="multipart/form-data">
+
+            <div class="back">
+              <i id="cross">&times;</i>
+            </div>
+            {% csrf_token %}
+            <div class="form-group">
+              <!-- <label for="mail" class="form-label">Email :-</label> -->
+              <input type="email" name="email"  placeholder="e.g. abc@gmail.com" class="ad-txt" id="mail">
+            </div>
+            <div class="form-group">
+              <!-- <label for="sub" class="form-label">Subject :-</label> -->
+              <input type="hidden" name="cuisine_id" value="{{id}}">
+              <input type="hidden" name="subject" class="form-control " id="sub" value="Your selected cuisine">
+            </div>
+            <div class="form-group">
+              <!-- <label for="msg" class="form-label">Message :-</label> -->
+              <textarea name="message " class="form-control ad-pass"  rows="4" placeholder="Your message"></textarea>
+            </div>
+            <div class="form-group">
+              <!-- <button type="submit" class="btn btn-success">mail with file</button> -->
+              <input type="submit"  class="btn btn-success" name="send" value="Send">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    </div>
+    <!-- make elif count_obj == 'f'
+    <div class="table-responsive">
+
+    <table  class="table w-50 mx-auto caption-top" id="myTable" border="1" align="center">
+
+      
+
+      <caption>Your Cuisine created on {{date}}/{{month}}/{{year}}</caption>
+
+      {% if breakfast%}
+      <tbody>
+        <tr scope="row">
+          <th colspan="3" class="title-row c-header" >Breakfast
+            <img src="{% static 'images/b.jpg' %}" alt=""> </th>
+
+        </tr>
+        <tr class="c-head">
+          <th scope="col" class="table-head">SN</th>
+          <th scope="col" class="table-head">Cuisine</th>
+          <th scope="col" class="last-td table-head">Item</th>
+        </tr>
+        {%for i in breakfast %}
+
+          <tr>
+            <td class="table-sn">{{forloop.counter}}</td>
+            <td class="table-cuisine">{{i.items.cuisine | title}}</td>
+            <td  class="table-item">{{i.items.item}}</td>
+          </tr>
+
+        {% endfor %}
+      </tbody>
+      {% endif %}
+
+
+      {% if lunch %}
+      <tbody >
+        <tr>
+          <th colspan="3" class="title-row c-header">Lunch
+          <img src="{% static 'images/l.jpg' %}" alt="">  </th>
+        </tr>
+        <tr class="c-head">
+          <th scope="col" class="table-head">SN</th>
+          <th scope="col" class="table-head">Cuisine</th>
+          <th scope="col" class="last-td table-head">Item</th>
+        </tr>
+
+        {%for i in lunch %}
+
+        <tr>
+          <td class="table-sn">{{forloop.counter}}</td>
+          <td class="table-cuisine">{{i.items.cuisine | title}}</td>
+          <td  class="table-item">{{i.items.item}}</td>
+        </tr>
+
+        {% endfor %}
+      </tbody>
+      {% endif%}
+
+      {% if dinner %}
+      <tbody>
+        <tr>
+          <th colspan="3" class="title-row c-header">Dinner
+          <img src="{% static 'images/d.jpg' %}" alt="">  </th>
+        </tr>
+        <tr class="c-head">
+          <th scope="col" class="table-head">SN</th>
+          <th scope="col" class="table-head">Cuisine</th>
+          <th scope="col" class="last-td table-head">Item</th>
+        </tr>
+        {%for i in dinner %}
+
+        <tr>
+          <td class="table-sn">{{forloop.counter}}</td>
+          <td class="table-cuisine">{{i.items.cuisine | title}}</td>
+          <td  class="table-item">{{i.items.item}}</td>
+        </tr>
+
+        {% endfor %}
+      </tbody>
+      {% endif %}
+
+
+
+      {% if hightea %}
+      <tbody>
+        <tr>
+          <th colspan="3" class="title-row c-header">HighTea
+          <img src="{% static 'images/hightea.jpg' %}" alt="">  </th>
+        </tr>
+        <tr class="c-head">
+          <th scope="col" class="table-head">SN</th>
+          <th scope="col" class="table-head">Cuisine</th>
+          <th scope="col" class="last-td table-head">Item</th>
+        </tr>
+
+
+            {%for i in hightea %}
+
+                <tr>
+                  <td class="table-sn">{{forloop.counter}}</td>
+                  <td class="table-cuisine">{{i.items.cuisine | title}}</td>
+                  <td  class="table-item">{{i.items.item}}</td>
+                </tr>
+
+            {% endfor %}
+      </tbody>
+      {% endif %}
+
+
+
+
+      {% if brunch %}
+      <tbody>
+        <tr>
+          <th colspan="3" class="title-row c-header">Brunch
+          <img src="{% static 'images/br.jpg' %}" alt=""> </th>
+        </tr>
+        <tr class="c-head">
+          <th scope="col" class="table-head">SN</th>
+          <th scope="col" class="table-head">Cuisine</th>
+          <th scope="col" class="last-td table-head">Item</th>
+        </tr>
+        {%for i in brunch %}
+
+        <tr>
+          <td class="table-sn">{{forloop.counter}}</td>
+          <td class="table-cuisine">{{i.items.cuisine | title}}</td>
+          <td  class="table-item">{{i.items.item}}</td>
+        </tr>
+
+        {% endfor %}
+      </tbody>
+      {% endif %}
+    </table>
+
+    <nav class="list-nav">
+    <ul>
+      <li>
+        <form method="post">{%csrf_token%}<button class="c-btn c-first"  name="save-btn" value="save-btn"> Save</button></form>
+      </li>
+    </ul>
+  </nav>
+
+</div> -->
+
+    {% else %}
+    <a href="/">make new</a>{{count_obj}}
+    <h1>Nothing in Cuisine</h1>
+    <div>
+    {% endif %}
+
+    <div id="footer_content1" style="text-align:center;"> <span style="font-size:20px;">A Product of MIS Pvt. Ltd.</span>
+        </div>
+
+    <div id="footer_content">Page <pdf:pagenumber>
+            of <pdf:pagecount>
+        </div>
+
+
+    <script type="text/javascript">
+        var cf = document.getElementById('form-attach');
+        cf.addEventListener('click' , function (){
+          resize();
+          hide();
+        });
+        function resize(){
+          document.getElementById('body-container').style.height = "100vh";
+          document.getElementById('body-container').style.overflow = "hidden";
+        }
+        function hide(){
+          document.getElementById('form-container').style.visibility = "visible";
+        }
+
+        var back = document.getElementById('cross');
+        back.addEventListener('click' , function (){
+          unresize();
+          unhide();
+        });
+        function unresize(){
+          document.getElementById('body-container').style.height = "auto";
+        }
+        function unhide(){
+          document.getElementById('form-container').style.visibility = "hidden";
+        }
+
+
+    </script>
+  </body>
+</html>

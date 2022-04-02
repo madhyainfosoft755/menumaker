@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+{% load static %}
+{% load menumaker_tags %}
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Menu Maker">
+  <meta name="author" content="">
+
+  <title>Menu Maker</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+ <!-- <link href="{% static 'css/heroic-features.css'%}" rel="stylesheet">-->
+  <style>
+    html {
+  overflow-x: hidden; }
+
+/*body {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  color: #000;
+  background-color: #f4ede5; }*/
+
+body, html{
+  height: 100%;
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  line-height: 1.8cm;
+  
+}  
+
+.parallax{
+  position: relative;
+  opacity: 0.70;
+  background-attachment: fixed;
+  
+  background-position: center;
+  background-repeat: no-repeat;
+
+ 
+}
+
+
+
+.pimg1{
+  background-image: url({% static 'images/food_dark1.jpg' %}) ;
+  min-height: 100%;
+  background-repeat: no-repeat;
+  padding-top: 400px;
+  
+
+  display: block;
+  margin-left: 100px;
+  
+ 
+}
+
+.pimg2{
+  background-image: url({% static 'images/salmon1.jpg' %});
+  min-height: 400px;
+  background-repeat: no-repeat;
+  margin-bottom: 40px;
+  
+  display: block;
+  margin-left: 100px;
+  
+}
+
+.pimg3{
+  background-image: url({% static 'images/donuts1.jpg' %});
+  min-height: 400px;
+  background-repeat: no-repeat;
+  margin-bottom: 40px;
+  
+  display: block;
+  margin-left: 100px;
+}
+
+.ptext{
+  
+  text-align: center;
+  color: #000;
+  
+  
+}
+.section{
+  text-align: center;
+  padding: 50px 80px;
+  border-radius: 50%;
+}
+.section-light{
+  background-color: #f4f4f4;
+  color: #666;
+  margin-bottom: 70px;
+  margin-top: 50px;
+  
+
+}
+
+.section-dark{
+  background-color: #282e34;
+  color: #ddd;
+  margin-bottom: 100px;
+}
+.border{
+  text-align: center;
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 100px;
+  
+  
+  
+}
+
+.ptext .border{
+    background-color: #111;
+    color: azure;
+    padding: 20px;
+}
+.ptext .border .trans{
+    background-color:transparent ;
+}
+
+
+
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 400; }
+
+.text-primary{
+  color: #e22104;
+  text-align: center;
+}
+
+.h1, .h2 {
+  font-weight: 700; }
+
+.subheading {
+  color: #f34949; }
+
+.bg-white {
+  background-color: #fff; }
+
+.bg-grey {
+  background-color: #f7f8f9; }
+
+
+ 
+
+a {
+  color: #f34949; }
+
+a:focus,
+button:focus {
+  outline: none;
+  box-shadow: none; }
+
+.btn:hover,
+a:hover {
+  text-decoration: none;
+  color: #e22104; }
+
+
+
+.btn-icon {
+  display: none;
+  align-items: center; }
+  .btn-icon .lnr {
+    font-size: 30px;
+    margin-right: 10px; }
+
+    .boxed-page {
+  position: relative;
+  border-color: #ededed;
+  background-color: #fff; }
+  .boxed-page .section-padding {
+    padding-top: 65px;
+    padding-bottom: 65px; }
+  @media (min-width: 992px) {
+    .boxed-page .section-padding {
+      padding-top: 130px;
+      padding-bottom: 130px; } }
+
+@media (min-width: 1200px) {
+  .boxed-page {
+    margin: 30px; } }  
+    
+    
+
+
+
+
+
+
+.img-bg {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center; }
+
+.img-cover {
+  object-fit: cover;
+  object-position: center; }
+
+
+
+.footer-logo {
+  height: 50px; }
+
+
+
+.btn {
+  font-size: 14px;
+  font-weight: 600; }
+
+.btn-primary {
+  display: none;
+  background-color: #f34949;
+  border-color: #f34949;
+  color: #fff;
+  border-radius: 30px;
+  padding: 9px 25px;
+  text-transform: capitalize;
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s; }
+  .btn-primary:hover {
+    background-color: #e22104;
+    border-color: #e22104;
+    color: #fff; }
+
+.btn-shadow {
+  box-shadow: -5px 8px 20px 0px rgba(229, 16, 2, 0.15); }
+
+.btn-icon {
+  color: #000; }
+
+
+
+.thumb-menu img {
+  height: 150px;
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  box-shadow: 0px 24px 48px -12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease; }
+
+.heading-section {
+  margin-bottom: 30px; }
+
+  
+
+.card-img-top {
+  padding: 5%;
+} 
+
+.text-danger {
+  padding-top: 100px;
+  
+}
+
+.card h-100 {
+  padding: 40px;
+}
+.container {
+  margin-bottom: 10px;
+}
+
+.col-lg-3 col-md-6 mb-4 {
+  padding-left: 60%;
+  color: #f4ede5;
+}
+
+
+.total_users{
+  text-align: center;
+  border: #000;
+  border-radius: 5%;
+  background-color: #F54748;
+  padding-block: 40px;
+  margin-bottom: 20px;
+
+}
+
+.total_cuisines{
+  text-align: center;
+  border: #000;
+  border-radius: 5%;
+  background-color: #F54748;
+  padding-block: 30px;
+  margin-top: 20px;
+  
+}
+
+.total_menus_created{
+  text-align: center;
+  border: #000;
+  border-radius: 5%;
+  background-color: #F54748;
+  padding-block: 30px;
+  margin-top: 80px;
+}
+
+
+
+
+
+
+
+
+  </style>
+
+
+
+
+
+ <!-- External CSS -->
+ <link rel="stylesheet" href="vendor/bootstrap/bootstrap.min.css">
+ <link rel="stylesheet" href="vendor/select2/select2.min.css">
+ <link rel="stylesheet" href="vendor/owlcarousel/owl.carousel.min.css">
+ <link rel="stylesheet" href="https://cdn.rawgit.com/noelboss/featherlight/1.7.13/release/featherlight.min.css">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.1/css/tempusdominus-bootstrap-4.min.css">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/brands.css">
+
+ <!-- Fonts -->
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700|Josefin+Sans:300,400,700">
+ <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+ <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+ <!--animation-->
+ <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+
+
+</head>
+
+<body>
+  <!-- Navigation -->
+{% if 'name' not in request.session %}
+  <nav class="navbar navbar-expand-lg navbar-dark bg-light fixed-top" style="height: 90px;">
+      <div class="container">
+        <img src="{% static 'images/logo_menu.jpg'%}" style="height:70px; width:80px; "> &nbsp &nbsp
+        <!-- {% if request.user.is_authenticated %}
+            <a class="navbar-brand" href="/profile/">Welcome {{request.user|upper}}</a>
+        {% endif %} -->
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive" style="text-align: center; padding-top: 30px;">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link text-dark fs-bold" href="/">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <!-- <li class="nav-item">
+              <a class="nav-link" href="#">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Services</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Contact</a>
+            </li> -->
+            <li class="nav-item active">
+              {% if not request.user.is_authenticated %}
+              <a class="nav-link text-dark" href="/signup/">SignUp</a>
+              {% endif %}
+            </li>
+            <li class="nav-item active">
+
+              {% if request.user.is_authenticated %}
+                  <a class="nav-link text-dark" href="/logout/">Logout</a>
+              {% else %}
+                  <a class="nav-link text-dark" href="/login/">Login</a>
+              {% endif %}
+
+            </li>
+            <!-- <li class="nav-item active">
+              <a class="nav-link" href="/cadmin/">Admin
+              </a>
+            </li> -->
+
+            <li class="nav-item active text-light">
+              {% if request.user.is_authenticated %}
+                <a href="/profile/" id="profile-text">
+                  <div class="bg-info text-light" id="user-profile"  style="height: 60px; width: 60px; border-radius: 50%;">{{first|title}}.{{last|title}}.</div>
+                </a>
+
+                <!--<a href="/profile/" class="nav-link" id="profile-text-div" >
+                  Profile
+                </a>
+              {% else %}
+                <div class="bg-light" id="user-profile-image"></div>
+              {% endif %}-->
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+
+  <!-- Page Content -->
+  
+
+
+  <div data-aos="flip-left">
+    <h1 class="text-danger" style="text-align: center; margin-top: 100px;" >Make Your Menu</h1>
+  </div> 
+
+
+
+
+
+
+    
+
+
+    <!-- Page Features -->
+    <div class="row text-center" style="margin-top: 60px;">
+
+      <div class="col-lg-3 col-md-6 mb-4" >
+        <div class="card h-100" data-aos="flip-down">
+          <img class="card-img-top" src="{% static 'images/Breakfast.jpg' %}" alt="" style="height: 260px;">
+          <!-- <div class="card-body">
+            <a href="/cuisines?role=Breakfast"><h4 class="card-title">Breakfast</h4></a>
+          </div> -->
+          <div class="card-footer">
+            <a href="/cuisines?role=Breakfast" class="btn btn-secondary">Create Breakfast Menu</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100" data-aos="flip-down">
+          <img class="card-img-top" src="{% static 'images/brunch.jpg' %}" alt="" style="height: 260px;">
+          <!-- <div class="card-body">
+            <a href="/cuisines?role=Brunch"><h4 class="card-title">Brunch</h4></a>
+          </div> -->
+          <div class="card-footer">
+            <a href="/cuisines?role=Brunch" class="btn btn-secondary">Create Brunch Menu</a>
+          </div>
+        </div>
+
+        
+      </div>
+
+
+      <div class="col-lg-3 col-md-6 mb-4" >
+        <div class="card h-100" data-aos="flip-down">
+          <img class="card-img-top" src="{% static 'images/lunch.jpg' %}" alt="" style="height: 260px;">
+          <!-- <div class="card-body">
+            <a href="/cuisines?role=Lunch"><h4 class="card-title">Lunch</h4></a>
+          </div> -->
+          <div class="card-footer">
+            <a href="/cuisines?role=Lunch" class="btn btn-secondary">Create Lunch Menu</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100" data-aos="flip-down">
+          <img class="card-img-top" src="{% static 'images/hightea.jpg' %}" alt="" style="height: 260px;">
+          <!-- <div class="card-body">
+            <a href="/cuisines?role=Hightea"><h4 class="card-title">HighTea</h4></a>
+          </div> -->
+          <div class="card-footer">
+            <a href="/cuisines?role=Hightea" class="btn btn-secondary">Create High Tea Menu</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100" data-aos="flip-down">
+          <img class="card-img-top" src="{% static 'images/dinner.jpg' %}" alt="" style="height: 260px;">
+          <!-- <div class="card-body">
+            <a href="/cuisines?role=Dinner"><h4 class="card-title">Dinner</h4></a>
+          </div> -->
+          <div class="card-footer">
+            <a href="/cuisines?role=Dinner" class="btn btn-secondary">Create Dinner Menu</a>
+          </div>
+        </div>
+      </div>
+
+      
+
+        
+      </div>
+
+      
+
+    </div>
+
+    
+
+  </div>
+
+  <div class="container " style="margin: top 66px;">
+
+    
+
+    <!-- Jumbotron Header -->
+    <!-- <div class="jumbotron my-4"  style="background-image:url({% static 'images/welcome2.jpg' %}); height: 400px;"><!
+      <h1 class="display-3">A Warm Welcome!</h1>
+      <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa, ipsam, eligendi, in quo sunt possimus non incidunt odit vero aliquid similique quaerat nam nobis illo aspernatur vitae fugiat numquam repellat.</p>
+      <a href="#" class="btn btn-primary btn-lg">Call to action!</a>
+    </div> -->
+
+
+
+
+
+
+
+
+
+
+   <div class="parallax">
+    <div class="pimg1" data-aos="fade-left">
+      <div class="ptext" >
+       <!---<span class="border">Menumaker</span>-->
+        
+      </div>
+      </div>
+  <section class="section section-light" data-aos="fade-right">
+      <h2>The Menumaker.</h2>
+      <p>
+        The teadious job of selecting the menu exists no more, create mouthwatering menus quickly and easily by browsing our selection of appetizing cuisines, choose items that fit your vision for parties, weddings and more!
+      </p>
+  </section>
+
+  <div class="pimg2" data-aos="fade-left">
+      <div class="ptext">
+        
+          <!--<span class="border">
+              Global Cuisines
+          </span>-->
+      </div>
+  </div> 
+  <section class="section section-dark" data-aos="fade-right">
+      <h2>Global Cuisines</h2>
+      <p>
+        Get to know the flavours of exquisite cuisines from around the globe, ranging from caribbean to greek, and choose from thousands of options!  
+      </p>
+  </section>
+  <div class="pimg3" data-aos="fade-left">
+      <div class="ptext" >
+       
+          <!--<span class="border">
+              Share Your Menu
+          </span>-->
+      </div>
+  </div> 
+  <section class="section section-light" data-aos="fade-right" >
+      <h2>Share Your Menu</h2>
+      <p>
+        Once you’ve finished making your custom menu online, it’s easy to share it with your caterers. Simply download your menu as a PDF and print it off yourself or mail it directly.
+      </p>
+  </section>
+  <!--<div class="pimg4">
+      <div class="ptext">
+        <img src="images/donuts.jpg" alt="">
+          <span class="border">
+             
+          </span>
+      </div>
+  </div> 
+  <section class="section section-dark">
+      <h2>Section Four</h2>
+      <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate veritatis mollitia blanditiis impedit, optio dolorum, totam excepturi sapiente quisquam suscipit eaque? Quibusdam ullam doloribus voluptatem exercitationem commodi perspiciatis quo cum eaque magnam rerum laborum reprehenderit nulla inventore officiis, fuga non iure explicabo mollitia pariatur. Voluptatem necessitatibus neque ab atque beatae exercitationem obcaecati possimus illum quod. Culpa, cupiditate enim. Laborum, officiis a illo praesentium placeat vitae natus blanditiis quidem, vel ipsam nobis explicabo autem! Obcaecati debitis fuga aliquam eveniet dolorum quos, quas, praesentium minima id dicta quisquam qui, dolores a molestias consequuntur minus maxime illo nam sed corrupti nihil! Id, quos?
+      </p>
+  </section>
+  <div class="pimg1">
+      <div class="ptext">
+          <img src="images/pasta.jpg" alt="">
+      </div>
+  </div> -->
+</div> 
+
+  
+
+  <footer class="py-1 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+    </div>
+  </footer>
+
+
+  <!--ADMIN-->
+
+
+  
+{% else %}
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top mb-2">
+  <div class="container">
+    <img src="{% static 'images/logo_menu.jpg'%}" style="height:70px; width:90px; "> &nbsp &nbsp
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link text-light" href="/">Home
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light" href="/users_list/">Users</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light" href="/add_cuisine/">Add Cuisine</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light" href="/add_admin/">Add Admin</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link text-light" href="/all_cuisine_list/">Cuisine list
+          </a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link text-light" href="/logout_admin/">Logout
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container border" style="background: #F9E4D4; margin-top:135px;">
+  <div class="row justify-content-center pt-5 pb-3" style="margin-bottom: 40px;">
+    <h1>Welcome  {{admin|title}}</h1>
+  </div>
+  <div class="row my-5 text-light">
+    <div class="col-6">
+      <div class="row justify-content-center my-2">
+        <div class="col-8 ">
+          <div class=" total_users">
+            <h3>Total Users</h3>
+            <h3> {{user_count}} </h3>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center my-2">
+        <div class="col-8" >
+          <div class="total_cuisines" >
+            <h3>Total Cuisines </h3>
+            <h3>{{cuisine_count}}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-4 p-4">
+    <div class="total_menus_created">
+      <h3>Total Menus Created </h3>
+      <h3>{{total_menu_yet}}</h3>
+    </div>
+  </div>
+  </div>
+</div>
+  <!-- Footer -->
+  <footer class=" row py-1 bg-dark" style="margin-top: 20px; padding-block: 50px;">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+    </div>
+    <!-- /.container --->
+  </footer>
+
+{% endif %}
+
+
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <!-- <script type="text/javascript">
+      $(document).ready(function () {
+          var url = window.location;
+          $('ul.nav a[href="'+ url +'"]').parent().addClass('active');
+          $('ul.nav a').filter(function() {
+               return this.href == url;
+          }).parent().addClass('active');
+      });
+  </script> -->
+  <script>
+    // $('#navbarResponsive > ul.nav li a').click(function(e) {
+    //     var $this = $(this);
+    //     $this.parent().siblings().removeClass('active').end().addClass('active');
+    //     e.preventDefault();
+    // });
+      // $('#navbarResponsive > ul.navbar-nav li').click(function(e) {
+      //   $('.navbar li.active').removeClass('active');
+      //   var $this = $(this);
+      //   if (!$this.hasClass('active')) {
+      //       $this.addClass('active');
+      //   }
+      //   e.preventDefault();
+      // });
+  </script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      offset: 100,
+      duration: 1000,
+    });
+  </script>
+
+</body>
+
+</html>

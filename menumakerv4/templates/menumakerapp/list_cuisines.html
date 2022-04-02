@@ -1,0 +1,287 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <!--Animation-->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" /> 
+  <title>Menu Maker</title>
+  <style>
+
+body, html{
+  height: 100%;
+  margin: 0;
+  background-image: url({% static 'images/list1.jpg' %});
+     background-size: 100% 150%;
+     /*background-size: cover;*/
+     height: 560px;
+     
+  
+  
+}  
+
+  .back-img{
+    overflow: hidden;
+    position: relative;
+    opacity: 0.8;
+  }
+
+  
+  
+
+  #user-profile-image{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-image: url({% static 'images/profile.jpg' %});
+    background-size: cover;
+  }
+
+  #user-profile{
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    color: black;
+    font-size: 14px;
+    line-height: 40px;
+    border-radius: 50%;
+    background:gray;
+    background-size: cover;
+  }
+  #profile-text:hover{
+    text-decoration: none;
+  }
+  #profile-text-div{
+    display: none;
+  }
+  @media only screen and (max-width: 600px) {
+    #profile-text{
+      display: none;
+    }
+    #profile-text-div{
+      display: block;
+    }
+  }
+  .col-lg-4{
+    
+    margin-top: 200px;
+    /*font-family: 'Pushster', cursive;
+    font-style: italic;
+    text-align: center;
+    font-size: 150%;
+    padding-left: 150px;*/
+    font-family: 'Pushster', cursive;
+    font-size: larger;
+    font-weight: 900;
+    padding-left: 150px;
+    color : #30475E;
+    
+
+    
+  }
+  /*.container{
+    z-index: 1;
+  }
+ 
+      .container::before{
+        content: '';
+        position: absolute;
+        
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 15rem;
+        background: linear-gradient(to left, #FFB319, #FFEEDB);
+        border-bottom-left-radius: 100%;
+        
+        z-index: -1;
+
+      }*/
+ 
+      
+
+  .list-group {
+    text-align: center;
+    background-color: E9C891;
+    padding: 2px;
+    font-family: 'Oswald', sans-serif;
+    margin-left: 400px;
+   
+
+   
+  }
+  .list-group-item{
+    padding: 30px;
+    margin: 2px;
+    background-color: transparent;
+    border-width: 0cm;
+    font-family: 'Pushster', cursive;
+    font-size: larger;
+    font-weight: 700;
+
+  }
+  
+  
+
+
+  </style>
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <img src="{% static 'images/logo_menu.jpg'%}" style="height:70px; width:80px; "> &nbsp &nbsp
+      <!-- {% if request.user.is_authenticated %}
+          <a class="navbar-brand" href="/profile/">Welcome {{request.user|upper}}</a>
+      {% endif %} -->
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link text-light" href="/">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li> -->
+          <li class="nav-item active">
+            {% if not request.user.is_authenticated %}
+            <a class="nav-link text-light" href="/signup/">SignUp</a>
+            {% endif %}
+          </li>
+          <li class="nav-item active">
+
+            {% if request.user.is_authenticated %}
+                <a class="nav-link text-light" href="/logout/">Logout</a>
+            {% else %}
+                <a class="nav-link text-light" href="/login/">Login</a>
+            {% endif %}
+
+          </li>
+
+          <li class="nav-item active">
+            {% if request.user.is_authenticated %}
+              <a href="/profile/" id="profile-text">
+                <div class="bg-info text-light" id="user-profile">{{first|title}}.{{last|title}}.</div>
+              </a>
+
+              <a href="/profile/" class="nav-link" id="profile-text-div">
+                Profile
+              </a>
+            {% else %}
+              <div class="bg-light" id="user-profile-image"></div>
+            {% endif %}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+<div class="back-img" >
+  <img src="url({% static 'images/list1.jpg' %});" alt="">
+</div>
+
+<div class="row">
+  
+  <div class="col-lg-3">
+  </div>
+  <div class="col-lg-4" data-aos="fade-right">
+    <input type="hidden" name="" id="role" value="{{role|title}}">
+    <h1>List Of Cuisines</h1><br>
+    
+
+      <!-- {% for c in cuisine %}
+        <a href="/cuisines?cuisine={{c}}&role={{role}}"><li class="abc" id="american">{{c | title}}</li></a>
+      {% endfor %} -->
+      <!-- <a href="/cuisines?cuisine=american&role={{role}}"><li class="abc" id="american">American</li></a>
+      <a href="/cuisines?cuisine=british&role={{role}}"><li class="abc" id="british">British</li></a>
+      <a href="/cuisines?cuisine=carribean&role={{role}}"><li class="abc" id="carribean">Carribean</li></a>
+      <a href="/cuisines?cuisine=chinese&role={{role}}"><li class="abc" id="chinese">Chinese</li></a>
+      <a href="/cuisines?cuisine=greek&role={{role}}"><li class="abc" id="greek">Greek</li></a>
+      <a href="/cuisines?cuisine=italian&role={{role}}"><li class="abc" id="italian">Italian</li></a>
+      <a href="/cuisines?cuisine=japanese&role={{role}}"><li class="abc" id="japanese">Japanese</li></a>
+      <a href="/cuisines?cuisine=indian&role={{role}}"><li class="abc" id="indian">Indian</li></a>
+      <a href="/cuisines?cuisine=labanese&role={{role}}"><li class="abc" id="labanese">Labanese</li></a>
+      <a href="/cuisines?cuisine=mediterranean&role={{role}}"><li class="abc" id="mediterranean">Mediterranean</li></a>
+      <a href="/cuisines?cuisine=thai&role={{role}}"><li class="abc" id="thai">Thai</li></a>  -->
+    </div>
+  <div class="col-lg-6" id="show" style=""></div>
+</div>
+
+<div class="container">
+  
+  <div class="row text-center">
+
+
+    <ul class="list-group" data-aos="fade-left">
+      {% for cui in cuisine %}
+        <li class="list-group-item d-flex justify-content-left align-items-center p-1">
+          <!-- <span class="badge bg-primary rounded-pill">{{forloop.counter}}</span> -->
+          {{forloop.counter}}. &nbsp &nbsp
+          <span style="width:200px;">
+             <a href="/cuisines?cuisine={{cui}}&role={{role}}" class="abc" id="{{role}}">{{cui}}</a><br>
+          </span>
+          <img src="{% static 'images/'%}{{cui}}.jpg" style="height:30px ;">
+        </li>
+      {% endfor %}
+
+
+    </ul>
+
+
+</div>
+  <!-- /.row -->
+
+</div>
+</div>
+
+  <script>
+$(document).ready(function(){
+  $('.abc').click(function(){
+    $cuisine = $(this).attr('id');
+    $role = $('#role').val();
+     if($cuisine)
+     {
+         $.ajax({
+            type: 'get',
+            url: "/cuisines",
+            data:{
+                'cuisine': $cuisine,
+                'role': $role
+                 },
+            success: function(data){
+               $('#show').html(data);
+             }
+         });
+       }
+
+     });
+});
+</script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 1000,
+    });
+  </script>

@@ -1,0 +1,152 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- Bootstrap core CSS -->
+      <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+      <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <style>
+       body{
+            background-image: url({% static 'images/loginn.jpg' %});
+            background-size: 100% 150%;
+            height: 560px;
+            
+        } 
+        .container-fluid{
+        width: 100%;
+        max-width: 40rem;
+        
+        position: relative;
+        padding: 10rem 0;
+        box-shadow: 0 1px 1.5rem rgba(0,0,0,.1);
+        border-radius: 1rem;
+
+      }
+      .container-fluid::before{
+        content: '';
+        position: absolute;
+        right: 30px;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 30rem;
+        background: linear-gradient(to left, #6998AB, #B1D0E0);
+        border-bottom-left-radius: 100%;
+        border-bottom-right-radius: 100%;
+        z-index: -1;
+ 
+       .col-md-4{
+         margin-top: 5px;
+       }
+       .form-group{
+         margin-top: 5px;
+       }
+       .form-control{
+         margin: 3px;
+       }
+       
+
+    </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-dark fixed-top">
+    <div class="container">
+      <img src="{% static 'images/logo_menu.jpg'%}" style="height:70px; width:80px; ">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link text-light" href="/">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li> -->
+          <li class="nav-item active">
+            <a class="nav-link text-light" href="/signup/">SignUp
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link text-light" href="/login/">Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+<div class="container-fluid" data-aos="fade-left">
+  <div class="row" style="margin-top: 100px;">
+    <div class="col-md-4">
+
+    </div>
+
+    <div class="col-md-4" >
+      <h1 style="text-align: center;">Login Here</h1><br>
+      <form method="post">
+        {% csrf_token %}
+        {% for message in messages %}
+           {% if 'notmatch' in message.tags %}
+             <div class="form-group" >
+               <span class="text-danger text-start" class="form-label">{{message}}</span>
+              </div>
+           {% endif %}
+         {% endfor %}
+        <div class="form-group">
+          Username <input type="text" name="username" class="form-control" placeholder="username" required>
+        </div>
+        <div class="form-group">
+          Password <input type="password" name="password" class="form-control" placeholder="password" required>
+        </div>
+        <div class="form-group">
+          <input type="submit" value="Login" class="form-control btn btn-primary">
+        </div>
+      </form>
+
+      <div class="form-group">
+        <a href="#">Forget password</a>
+      </div>
+
+      <div class="form-group">
+        Don't have a account?<a href="/signup/"> Signup here</a>
+      </div>
+
+
+    </div>
+    <div class="col-md-4">
+
+    </div>
+  </div>
+
+</div>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration:1200,
+  });
+</script>
+
+
+</body>
+</html>

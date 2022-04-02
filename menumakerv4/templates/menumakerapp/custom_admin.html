@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Django Admin</title>
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-light fixed-top mb-5">
+      <div class="container">
+
+        <a class="navbar-brand" href="/my_page/"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link text-dark" href="/">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="#">About</a>
+            </li>
+            <li class="nav-item text-dark">
+              <a class="nav-link" href="#">Services</a>
+            </li>
+            <li class="nav-item text-dark">
+              <a class="nav-link" href="#">Contact</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link text-dark" href="/signup/">SignUp
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link text-dark" href="/logout/">Logout
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link text-dark" href="/cadmin/">Admin
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <br><br><br><br><br><br>
+<!-- /***** navbar close ****/ -->
+
+      <div class="container mt-5">
+        <div class="row justify-content-center">
+          <div class="col-4 border shadow p-0">
+            <div class="col-12 text-center py-3 text-light" style="font-size:18px; background:#417690;">
+              Django administration
+            </div>
+            <form  method="POST" ">
+              {%  csrf_token %}
+              <!-- <div class=" px-3 py-2">
+                <label for="user" class="form-label text-dark">User</label>
+                <input type="text" class="form-control" id="user" name='user'>
+              </div>
+              <div class=" px-3 py-2">
+                <label for="pass" class="form-label">Password</label>
+                <input type="password" class="form-control" id="pass" name='password'>
+              </div> -->
+              <div class="px-3 py-2">{{form.as_p}}</div>
+
+              <div class="col-12 text-center mb-3 mt-2">
+                <button type="submit" class="btn text-light px-3 fs-3" style="background: #609ab6;">Log in</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </body>
+</html>

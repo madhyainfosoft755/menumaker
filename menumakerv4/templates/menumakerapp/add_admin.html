@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Add new admin</title>
+    <!-- Bootstrap core CSS --->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    
+  </head>
+  <body>
+{% if admin %}
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top mb-5">
+      <div class="container">
+        <img src="{% static 'images/logo_menu.jpg'%}" style="height:50px; width:80px; ">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link text-light" href="/">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="/users_list/">Users</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="/add_cuisine/">Add Cuisine</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="/add_admin/">Add Admin</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link text-light" href="/all_cuisine_list/">Cuisine list
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link text-light" href="/logout_admin/">Logout
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <br><br><br><br>
+<!-- /***** navbar close ****/ -->
+
+    <div class="container mt-5">
+
+      <div class="row justify-content-center mt-5">
+        <div class="col-4 border shadow p-0">
+          <div class="col-12 text-center py-3 text-light" style="font-size:18px; background:#417690; margin-bottom: 8px;">
+            Add new admin
+          </div>
+          <form  method="POST" >
+            {%  csrf_token %}
+            {% for message in messages %}
+              {% if 'notmatch' in message.tags %}
+                <span class="text-danger p-3">{{message}}</span><br>
+              {% endif %}
+            {% endfor %}
+
+            {% for message in messages %}
+              {% if 'add' in message.tags %}
+                <span class="text-primary p-3">{{message}}</span><br>
+              {% endif %}
+            {% endfor %}
+
+            {% for message in messages %}
+              {% if 'exist' in message.tags %}
+                <span class="text-danger p-3">{{message}}</span><br>
+              {% endif %}
+            {% endfor %}
+            <div class="px-3 ">{{form.as_p}}</div>
+            <div class="col-12 text-center mb-3 mt-2">
+              <button type="submit" class="btn text-light px-3" style="background: #609ab6;">Add</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+{% else %}
+<h1> not login </h1>
+
+{% endif %}
+  </body>
+</html>

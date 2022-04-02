@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Add new Cuisine</title>
+    <!-- Bootstrap core CSS --->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  </head>
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-light fixed-top mb-5">
+      <div class="container">
+        <img src="{% static 'images/logo_menu.jpg'%}" style="height:70px; width:70px; ">
+        <!-- <a class="navbar-brand" href="/">Welcome {{admin|title}}</a> -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link text-dark" href="/">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="/users_list/">Users</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="/add_cuisine/">Add Cuisine</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="/add_admin/">Add Admin</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link text-dark" href="/all_cuisine_list/">Cuisine list
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link text-dark" href="/logout_admin/">Logout
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <br><br><br><br>
+<!-- /***** navbar close ****/ -->
+
+
+    <div class="container">
+      <div class="row">
+        <div class="col-1"></div>
+        <form action="/add_cuisine_data/" class="col-4 border shadow p-2" style="margin-top: 50px; ">
+
+
+            {% for message in messages %}
+              {% if 'item_ex' in message.tags %}
+                <div class="form-group">
+                  <label class="form-label text-danger">{{message}}</label>
+                </div>
+              {% endif %}
+            {% endfor %}
+
+            <div class="form-group">
+              <label for="inputCuisine" class="form-label" style="padding-top: 10px;">Select Cuisine </label><br>
+              <select id="inputCuisine" class="form-control mb-3" name="cuisine" aria-label="Default select example" required>
+                <option value="" selected>Choose...</option>
+                {% for cui in cuisine %}
+                  <option value="{{cui}}">{{cui}}</option>
+                {% endfor %}
+              </select>
+
+            </div>
+            <div class="form-group" >
+              <label for="inputType" class="form-label">Select Meal </label>
+              <select class="form-control mb-3" id="inputType" name="type" aria-label="Default select example" required>
+                <option value="" selected>Choose...</option>
+                {% for i in type %}
+                  <option value="{{i}}">{{i}}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+          <label for="inputItem" class="form-label">Item Name </label>
+          <input type="text" name="item" id="inputItem" class="form-control" required><br>
+
+          <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+
+
+
+
+        <div class="col-2">
+
+        </div>
+        <div class="col-4">
+          <div class="col-12 p-4" style="margin-top: 50px; ">
+            <form action="/add_cuisine/" class="row p-2">
+                  <div class="form-group row border shadow p-2 ">
+                    {% csrf_token%}
+                    <div class="col-9">
+                      <label for="inputC" class="form-label" style="padding-top: 10px;">Add New Cuisine </label><br>
+                      <input type="text" name="newCuisine" id="inputC" class="form-control" required>
+                    </div>
+                    <div class="col-3" >
+                      <button type="submit" class="btn btn-primary mt-4">Add</button>
+                    </div>
+                  </div>
+            </form>
+          </div>
+          <div class="col-12 p-4 border shadow mt-4" style="margin-top: 50px; ">
+            <form action="/add_cuisine/"  method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              {% for message in messages %}
+                {% if 'err' in message.tags %}
+                  <span class="text-danger">{{message}}</span><br>
+                {% else %}
+                  <span class="text-primary">{{message}}</span><br>
+                {% endif %}
+              {% endfor %}
+              <label for="bulkFile" class="form-label" style="padding-top: 10px;">Upload File </label>
+              <input type="file" name="CuisineFile" class="form-control" id="bulkFile" required><br>
+              <input type="submit" value="upload" class="btn btn-primary">
+            </form>
+          </div>
+        </div>
+
+            <!-- <div class="form-group">
+              <label for="inputR" class="form-label">Select Type </label>
+              <input type="text" name="newRole" id="inputR" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-primary">Add</button> -->
+        </form>
+      </div>
+
+      <!-- **************** Back button ****************
+      <div class="row">
+        <div class="col-12 p-2">
+          <a href="/admin_page/" class="btn btn-primary px-4 py-2 ml-4">Back</a>
+        </div>
+      </div> -->
+    </div>
+  </body>
+</html>
